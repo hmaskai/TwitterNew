@@ -53,14 +53,17 @@ class TweetCell: UITableViewCell {
     }
     
     @IBAction func onRetweetButton(sender: AnyObject) {
+        print(tweet.retweetCount)
         tweet.retweetCount = tweet.retweetCount + 1
-        print("pressed")
+        retweetCountLabel.text = String(tweet.retweetCount)
+        print("after press count\(tweet.retweetCount)")
         
         
     }
     
     @IBAction func onFavButton(sender: AnyObject) {
         tweet.favoritesCount = tweet.favoritesCount + 1
+        favCountLabel.text = String(tweet.favoritesCount)
         
     }
     
