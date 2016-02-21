@@ -26,8 +26,14 @@ class TweetCell: UITableViewCell {
             favCountLabel.text = String(tweet.favoritesCount)
             timestampLabel.text = String(tweet.timestamp!)
             usernameLabel.text = String(tweet.user["name"]!)
-            profilePictureView.setImageWithURL(tweet.user["profileUrl"]! as! NSURL)
-            profileNameLabel.text = String(tweet.user["screenname"])
+            
+            let profileImageUrl = tweet.user["profile_image_url"] as! String
+            let profileImageNSUrl = NSURL(string: profileImageUrl)
+            profilePictureView.setImageWithURL(profileImageNSUrl!)
+            profileNameLabel.text = String("@\(tweet.user["screen_name"]!)")
+            
+            print(tweet.user)
+            
         }
     }
     
@@ -36,6 +42,8 @@ class TweetCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        profilePictureView.layer.cornerRadius = 5
+        profilePictureView.clipsToBounds = true
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -43,5 +51,18 @@ class TweetCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    @IBAction func onRetweetButton(sender: AnyObject) {
+        tweet.retweetCount = tweet.retweetCount + 1
+        print("pressed")
+        
+        
+    }
+    
+    @IBAction func onFavButton(sender: AnyObject) {
+        tweet.favoritesCount = tweet.favoritesCount + 1
+        
+    }
+    
 
 }
